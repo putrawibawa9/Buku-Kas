@@ -1,0 +1,22 @@
+/* Style to make tables display inline-block */
+.table-container {
+    display: inline-block;
+    margin-right: 20px; /* Adjust the margin as needed */
+  }
+
+  /* Optional: Add some styling to the tables for better visualization */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
