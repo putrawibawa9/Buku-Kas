@@ -24,7 +24,7 @@
         <a class="nav-link menu-home" aria-current="page" href="../View/dashboard.php">Dashboard</a>
         <a class="nav-link menu-category" href="../View/recapitulation.php">Recapitulation</a>
         <a class="nav-link category-list" href="../View/categoryList.php">Category List</a>
-        <a class="nav-link" href="../admin/logout.php">logout</a>
+        <a class="nav-link" href="../Controller/logout.php">logout</a>
       </div>
     </div>
   </div>

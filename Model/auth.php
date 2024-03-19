@@ -1,5 +1,6 @@
 <?php
-require_once "construct.php";
+
+require_once "connect.php";
 class Auth extends Connect{
     public $error =false;
     public $row;
@@ -23,7 +24,8 @@ public function login ($username, $password){
 
     $result->execute([$username, $password]);
     if($this->row = $result->fetch()){
-        header("Location: admins/index.php");
+        $_SESSION['username'] = $username ;
+        header("Location: View/dashboard.php");
     }else{
         $this->error = True;
         header("Location: index.php?error=1");
@@ -32,9 +34,20 @@ public function login ($username, $password){
    
     }
 
-public function logout(){
+public static function logout(){
+    // Start the session
+    session_start();
+
+    // Unset all session variables
+    $_SESSION = array();
+
+    // Destroy the session
+    session_destroy();
+
+
+    // Redirect the user to the login page or any other appropriate page
     header("Location: ../index.php");
-    exit;
+    exit; // Make sure to exit after redirecting to prevent further execution
 }
 }
 ?>

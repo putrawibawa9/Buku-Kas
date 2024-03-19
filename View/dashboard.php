@@ -1,4 +1,17 @@
 <?php
+session_start();
+
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION["username"];
+} else {
+  echo "
+  <script>
+  document.location.href = '../index.php';
+  </script>
+";
+}
+
+
 require_once '../Resource/header.php'; 
 require_once '../Controller/Transaction.php'; 
 require_once '../Controller/Category.php'; 
@@ -62,7 +75,7 @@ if(isset($_GET['filter'])){
     <div class="container">
       <div class="row">
         <div class="col-12 p-3 bg-white">
-          <h3 class="text-center mb-5 mt-5">Dashboard</h3>
+          <h3 class="text-center mb-5 mt-5">Welcome <?= $username?></h3>
 
           <form class="horizontal-form" method="POST" action="">
     <input type="date" id="transaction_date" name="transaction_date" required>
@@ -97,6 +110,7 @@ if(isset($_GET['filter'])){
         <button type="submit" class="btn btn-primary" name="filter" >Filter</button>
       </form>
 
+
           <div class="dropdown mb-3 mt-3">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
     Category
@@ -109,6 +123,9 @@ if(isset($_GET['filter'])){
 
   <a href="dashboard.php" class="btn btn-md btn-primary">Back</a>
 </div>
+
+
+
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -153,7 +170,7 @@ if(isset($_GET['filter'])){
                 </tbody>
         </table>
         <div>
-          
+                
           </div>
     </div>
   </div>

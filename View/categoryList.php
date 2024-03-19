@@ -1,4 +1,17 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION['username'])) {
+  $username = $_SESSION["username"];
+} else {
+  echo "
+  <script>
+  document.location.href = '../index.php';
+  </script>
+";
+}
+
 require_once '../Resource/header.php'; 
 require_once '../Controller/Category.php'; 
 

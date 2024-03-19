@@ -1,6 +1,9 @@
 <?php
+
+session_start();
+
 if(isset($_POST['login'])){
-    include_once "Controller/Auth.php";
+    include_once "Model/Auth.php";
 
     $auth = new Auth;
 
