@@ -24,8 +24,8 @@ class Transaction extends Connect{
 
     public function readEachTransaction($category_id){
         $conn = $this->getConnection();
-        $query = "SELECT * FROM category 
-        JOIN transaction ON category.category_id = transaction.category_id
+        $query = "SELECT * FROM transaction 
+        JOIN category ON transaction.category_id = category.category_id
         WHERE category.category_id = '$category_id' ";  
         $result = $conn->query($query);
         $burger = $result->fetchAll();
@@ -158,6 +158,7 @@ class Transaction extends Connect{
         return $result;
 }
 
+   
     
 }
 ?>

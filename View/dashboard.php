@@ -162,7 +162,7 @@ if(isset($_GET['filter'])){
                 ?>
                   </td>
                   <td>
-                        <a  href="../Controller/transactionEdit.php?transaction_id=<?=$row['transaction_id'];?>" class="btn btn-warning btn-sm ">Edit</a>
+                        <a  href="transactionEdit.php?transaction_id=<?=$row['transaction_id'];?>" class="btn btn-warning btn-sm ">Edit</a>
                         <a href="../Controller/transactionDelete.php?transaction_id=<?=$row['transaction_id'];?>" class="btn btn-danger btn-sm " onclick="return confirm('yakin?');">Delete</a>
                    </td>
                   </tr>

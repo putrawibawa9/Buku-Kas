@@ -2,6 +2,7 @@
 require_once '../Resource/header.php'; 
 require_once '../Controller/Transaction.php'; 
 require_once '../Controller/Category.php'; 
+require_once '../Controller/Total.php'; 
 
 session_start();
 
@@ -15,6 +16,22 @@ if (isset($_SESSION['username'])) {
 ";
 }
 
+if(isset($_GET['submit'])){
+
+  $category_type = $_GET['category_type'];
+
+  $filterall = new Total;
+
+  $filter = $filterall->readCategoryBased($category_type);
+  
+  $sum = $filterall->sumTotalCategory($category_type);
+
+  var_dump($sum);
+  exit;
+}
+
+
+
 $income = new Transaction;
 $income = $income->readIncome();
 
@@ -22,9 +39,14 @@ $income = $income->readIncome();
 $outcome = new Transaction;
 $outcome = $outcome->readOutcome();
 
+$allCategory = new Category;
+$all_Category = $allCategory->readcategory();
 
-$category = new Category;
-$all_category = $category->readcategory();
+
+
+$sumCategory = new Category;
+
+$category = $sumCategory->sumEachCategory('P001');
 ?>
 
 
@@ -63,22 +85,7 @@ $all_category = $category->readcategory();
       </div>
     </div>
 
-    <div class="dropdown mb-3 mt-3">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Category
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-  <?php foreach($category1 as $row):?>
-    <li><a class="dropdown-item" href="dashboard.php?category_id=<?= $row["category_id"]?>"><?= $row["category_name"]?> || <?= $row["category_id"]?></a></li>
-    <?php endforeach; ?>
-  </ul>
-  </div>
-    <form method="POST" action="">
-    <select  name="transaction_type" required>
-                <option value="income">Income</option>
-                <option value="outcome">Outcome</option>
-        </select>
-        </form>
+
   </div>
 
   
@@ -87,14 +94,20 @@ $all_category = $category->readcategory();
       <!-- First column -->
       <div class="col-md-6 border">
         <h2>Category</h2>
-        <?php foreach($all_category as $row):?>
+        <?php foreach($all_Category as $row):?>
         <p class="border"><?= $row['category_name']?></p>
         <?php endforeach; ?>
       </div>
       <!-- Second column -->
+
       <div class="col-md-6 border">
         <h2>Total</h2>
-        <p>This is the content of the second column. You can add any content here.</p>
+        <?php foreach($all_Category as $row):?>
+        <p><?php $category = $sumCategory->sumEachCategory($row["category_id"]);
+        
+        echo "Rp. $category[0]"
+        ?></p>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>

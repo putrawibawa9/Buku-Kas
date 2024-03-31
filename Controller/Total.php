@@ -12,4 +12,16 @@ class Total extends Connect{
         return $burger;
         }
 
+        public function sumTotalCategory($category_id){
+            $conn = $this->getConnection();
+            $query = "SELECT SUM(transaction_amount * transaction_price) AS total_sum
+            FROM transaction
+            JOIN category ON category.category_id = transaction.category_id
+            WHERE category_id = '$category_id';";
+            $result = $conn->query($query);
+            $burger = $result->fetchAll();
+            return $burger;
+            }
+        
+     
 }
